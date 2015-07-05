@@ -4,16 +4,23 @@ package com.butne;
 Enemy class
  */
 public class Enemy {
+
     protected String name;
     protected String enemyType;
     protected int maxHealth;
     protected int currentHealth;
     protected int expAwarded;
     protected int gpAwarded;
-    protected int attack;
-    protected int skill;
-    protected int intellignence;
-    protected int mind;
+
+    /*
+        These stats are represented as an array since we have three different stats, one for each
+        set of "dice": Green, Blue, Red
+    */
+
+    protected int attack [] = new int[3];
+    protected int skill [] = new int[3];
+    protected int intelligence[] = new int[3];
+    protected int mind [] = new int[3];
 
     public String getName() {
         return name;
@@ -61,37 +68,5 @@ public class Enemy {
 
     public void setGpAwarded(int gpAwarded) {
         this.gpAwarded = gpAwarded;
-    }
-
-    public int getAttack() {
-        return attack;
-    }
-
-    public void setAttack(int attack) {
-        this.attack = attack;
-    }
-
-    public int getSkill() {
-        return skill;
-    }
-
-    public void setSkill(int skill) {
-        this.skill = skill;
-    }
-
-    public int getIntellignence() {
-        return intellignence;
-    }
-
-    public void setIntellignence(int intellignence) {
-        this.intellignence = intellignence;
-    }
-
-    public int getMind() {
-        return mind;
-    }
-
-    public void setMind(int mind) {
-        this.mind = mind;
     }
 }
