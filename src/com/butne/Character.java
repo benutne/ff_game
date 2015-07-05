@@ -1,9 +1,13 @@
 package com.butne;
 
+import javax.swing.plaf.synth.Region;
+
 /**
 Character class
  */
 public class Character {
+
+/*    Here are our basic character stats.  */
 
     protected String name;
     protected String characterType;
@@ -14,69 +18,7 @@ public class Character {
     protected int maxMana;
     protected int currentMana;
 
-
-/*    These stats are represented as an array since we have three different stats, one for each
-    set of "dice": Green, Blue, Red*/
-
-
-    protected int attack [] = new int[3];
-    protected int skill [] = new int[3];
-    protected int intelligence[] = new int[3];
-    protected int mind [] = new int[3];
-
-/*    Get/Set Functions for above stats*/
-
-    public int[] getAttack() {
-        return attack;
-    }
-
-    public void setAttack(int[] attack) {
-        this.attack = attack;
-    }
-
-    public int[] getSkill() {
-        return skill;
-    }
-
-    public void setSkill(int[] skill) {
-        this.skill = skill;
-    }
-
-    public int[] getIntelligence() {
-        return intelligence;
-    }
-
-    public void setIntelligence(int[] intelligence) {
-        this.intelligence = intelligence;
-    }
-
-    public int[] getMind() {
-        return mind;
-    }
-
-    public void setMind(int[] mind) {
-        this.mind = mind;
-    }
-
-
-/*    The equipment element is considered an array of four items since we can have up to four pieces of
-    equipment on a character at any given time.  */
-
-    protected Equipment equipmentSlot [] = new Equipment[4];
-
-    //Functions for calculating current stats like attack, skill, intelligence, and mind
-
-    public int [] returnCurrentAttack() {
-        int r_attack [] = new int [3];
-        int baseAttack [] = getAttack();
-        return r_attack;
-    }
-
-    protected int [] calculateAttackEquipmentBonus(){
-        int [] r_attackBonus = new int [3];
-
-        return r_attackBonus;
-    }
+    // <editor-fold desc="Get and set funtions for above stats">
 
     public String getName() {
         return name;
@@ -141,4 +83,84 @@ public class Character {
     public void setCharacterAbilities(String[] characterAbilities) {
         this.characterAbilities = characterAbilities;
     }
+
+    //</editor-fold>
+
+
+/*    These stats are represented as an array since we have three different stats, one for each
+    set of "dice": Green, Blue, Red*/
+
+
+    protected int attack [] = new int[3];
+    protected int skill [] = new int[3];
+    protected int intelligence[] = new int[3];
+    protected int mind [] = new int[3];
+
+// <editor-fold desc="Get and set funtions for above stats">
+
+
+    public int[] getAttack() {
+        return attack;
+    }
+
+    public void setAttack(int[] attack) {
+        this.attack = attack;
+    }
+
+    public int[] getSkill() {
+        return skill;
+    }
+
+    public void setSkill(int[] skill) {
+        this.skill = skill;
+    }
+
+    public int[] getIntelligence() {
+        return intelligence;
+    }
+
+    public void setIntelligence(int[] intelligence) {
+        this.intelligence = intelligence;
+    }
+
+    public int[] getMind() {
+        return mind;
+    }
+
+    public void setMind(int[] mind) {
+        this.mind = mind;
+    }
+// </editor-fold>
+
+/*    The equipment element is considered an array of four items since we can have up to four pieces of
+    equipment on a character at any given time.  */
+
+    protected Equipment equipmentSlot [] = new Equipment[4];
+
+    public int [] returnCurrentAttack() {
+        int r_attackTotal [] = new int [3];
+        int baseAttack [] = getAttack();
+        int attackBonus [] = calculateAttackEquipmentBonus();
+        for (int i = 0; i < r_attackTotal.length; i++) {
+            r_attackTotal[i] = baseAttack[i] + attackBonus[i];
+        }
+        return r_attackTotal;
+    }
+
+/*
+    This function adds up all the attack bonuses from equipment into a single array of three numbers.
+*/
+
+    protected int [] calculateAttackEquipmentBonus(){
+        int [] r_attackBonus = new int [3];
+
+        for (Equipment iter_equip : this.equipmentSlot){
+        r_attackBonus[0] = iter_equip.attack[0] + r_attackBonus[0];
+        r_attackBonus[1] = iter_equip.attack[1] + r_attackBonus[1];
+        r_attackBonus[2] = iter_equip.attack[2] + r_attackBonus[2];
+        }
+
+        return r_attackBonus;
+    }
+
 }
