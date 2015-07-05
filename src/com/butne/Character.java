@@ -87,7 +87,8 @@ public class Character {
     //</editor-fold>
 
 /*    These stats are represented as an array since we have three different stats, one for each
-    set of "dice": Green, Blue, Red*/
+    set of "dice": Green, Blue, Red
+*/
 
 
     protected int attack [] = new int[3];
@@ -132,9 +133,14 @@ public class Character {
 // </editor-fold>
 
 /*    The equipment element is considered an array of four items since we can have up to four pieces of
-    equipment on a character at any given time.  */
+    equipment on a character at any given time.
+*/
 
     protected Equipment equipmentSlot [] = new Equipment[4];
+
+/*
+    This function calculates attack including bonuses from equipment.
+*/
 
     public int [] returnCurrentAttack() {
         int r_attackTotal [] = new int [3];
@@ -160,6 +166,96 @@ public class Character {
         }
 
         return r_attackBonus;
+    }
+
+/*
+    This function calculates skill including bonuses from equipment.
+*/
+
+    public int [] returnCurrentSkill() {
+        int r_skillTotal [] = new int [3];
+        int baseSkill [] = getSkill();
+        int skillBonus [] = calculateSkillEquipmentBonus();
+        for (int i = 0; i < r_skillTotal.length; i++) {
+            r_skillTotal[i] = baseSkill[i] + skillBonus[i];
+        }
+        return r_skillTotal;
+    }
+
+/*
+    This function adds up all the skill bonuses from equipment into a single array of three numbers.
+*/
+
+    protected int [] calculateSkillEquipmentBonus(){
+        int [] r_skillBonus = new int [3];
+
+        for (Equipment iter_equip : this.equipmentSlot){
+            r_skillBonus[0] = iter_equip.skill[0] + r_skillBonus[0];
+            r_skillBonus[1] = iter_equip.skill[1] + r_skillBonus[1];
+            r_skillBonus[2] = iter_equip.skill[2] + r_skillBonus[2];
+        }
+
+        return r_skillBonus;
+    }
+
+/*
+    This function calculates intelligence including bonuses from equipment.
+*/
+
+    public int [] returnCurrentIntelligence() {
+        int r_intelligenceTotal [] = new int [3];
+        int baseIntelligence [] = getIntelligence();
+        int intelligenceBonus [] = calculateIntelligenceEquipmentBonus();
+        for (int i = 0; i < r_intelligenceTotal.length; i++) {
+            r_intelligenceTotal[i] = baseIntelligence[i] + intelligenceBonus[i];
+        }
+        return r_intelligenceTotal;
+    }
+
+/*
+    This function adds up all the intelligence bonuses from equipment into a single array of three numbers.
+*/
+
+    protected int [] calculateIntelligenceEquipmentBonus(){
+        int [] r_intelligenceBonus = new int [3];
+
+        for (Equipment iter_equip : this.equipmentSlot){
+            r_intelligenceBonus[0] = iter_equip.intelligence[0] + r_intelligenceBonus[0];
+            r_intelligenceBonus[1] = iter_equip.intelligence[1] + r_intelligenceBonus[1];
+            r_intelligenceBonus[2] = iter_equip.intelligence[2] + r_intelligenceBonus[2];
+        }
+
+        return r_intelligenceBonus;
+    }
+
+/*
+    This function calculates intelligence including bonuses from equipment.
+*/
+
+    public int [] returnCurrentMind() {
+        int r_mindTotal [] = new int [3];
+        int baseMind [] = getMind();
+        int mindBonus [] = calculateMindEquipmentBonus();
+        for (int i = 0; i < r_mindTotal.length; i++) {
+            r_mindTotal[i] = baseMind[i] + mindBonus[i];
+        }
+        return r_mindTotal;
+    }
+
+/*
+    This function adds up all the intelligence bonuses from equipment into a single array of three numbers.
+*/
+
+    protected int [] calculateMindEquipmentBonus(){
+        int [] r_mindBonus = new int [3];
+
+        for (Equipment iter_equip : this.equipmentSlot){
+            r_mindBonus[0] = iter_equip.mind[0] + r_mindBonus[0];
+            r_mindBonus[1] = iter_equip.mind[1] + r_mindBonus[1];
+            r_mindBonus[2] = iter_equip.mind[2] + r_mindBonus[2];
+        }
+
+        return r_mindBonus;
     }
 
 }
