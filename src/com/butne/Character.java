@@ -18,7 +18,7 @@ public class Character {
     protected int maxMana;
     protected int currentMana;
 
-    // <editor-fold desc="Get and set funtions for above stats">
+// <editor-fold desc="Get and set funtions for above stats">
 
     public String getName() {
         return name;
@@ -85,7 +85,6 @@ public class Character {
     }
 
     //</editor-fold>
-
 
 /*    These stats are represented as an array since we have three different stats, one for each
     set of "dice": Green, Blue, Red*/
